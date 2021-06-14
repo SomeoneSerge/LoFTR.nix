@@ -5,6 +5,7 @@
   inputs.devshell.url = "github:numtide/devshell";
   inputs.mach-nix = { };
   inputs.poetry2nix-src.url = "github:nix-community/poetry2nix";
+  inputs.nixpkgs.follows = "mach-nix/nixpkgs";
 
   outputs =
     { self, nixpkgs, flake-utils, mach-nix, poetry2nix-src, ... }@inputs:
