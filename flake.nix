@@ -18,6 +18,10 @@
           };
           pythonEnv = final.mach-nix.mkPython {
             requirements = builtins.readFile ./requirements.txt;
+            _.opencensus-context.postInstall = ''
+              rm $out/lib/python*/site-packages/opencensus/common/__pycache__/__init__.cpython-*.pyc
+              rm $out/lib/python*/site-packages/opencensus/__pycache__/__init__.cpython-*.pyc
+            '';
             # overridesPost = [ final.poetry2nix.defaultPoetryOverrides ];
           };
         };
