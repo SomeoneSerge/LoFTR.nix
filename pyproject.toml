@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "LoFTR-aalto-submit"
+version = "0.1.0"
+description = "Submission script for LoFTR"
+authors = ["Serge Ko <newkozlukov@gmail.com>"]
+license = "MIT"
+packages = [
+    { include = "./*.py" },
+    { include = "./internal/*.py" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+albumentations = "^1.0.0"
+opencv-python = "^4.5.2"
+ray = "^1.4.0"
+einops = "^0.3.0"
+kornia = "^0.5.4"
+loguru = "^0.5.3"
+tacs = "^0.0.1"
+tqdm = "^4.61.1"
+matplotlib = "^3.4.2"
+h5py = "^3.2.1"
+
+[tool.poetry.dev-dependencies]
+black = "^21.6b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+asub = "asub:main"
