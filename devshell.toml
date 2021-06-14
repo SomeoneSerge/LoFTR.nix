@@ -1,2 +1,2 @@
 [devshell]
-packages = [ "poetryEnv", "poetry" ]
+packages = [ "pythonEnv" ]
