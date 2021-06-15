@@ -1,2 +1,2 @@
 [devshell]
-packages = [ "pythonEnv" ]
+packages = [ "pythonEnv", "mach-nix.mach-nix" ]

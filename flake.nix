@@ -18,6 +18,12 @@
           };
           pythonEnv = final.mach-nix.mkPython {
             requirements = builtins.readFile ./requirements.txt;
+            overridesPost = [
+              (python-final: python-prev: {
+                opencv-python-headless =
+                  python-prev.opencv4.overrideAttrs (_: { enableGtk = true; });
+              })
+            ];
             _.opencensus-context.postInstall = ''
               rm $out/lib/python*/site-packages/opencensus/common/__pycache__/__init__.cpython-*.pyc
               rm $out/lib/python*/site-packages/opencensus/__pycache__/__init__.cpython-*.pyc
@@ -34,6 +40,9 @@
         };
       in {
         inherit overlay devShell;
-        packages = { inherit (pkgs) pythonEnv; };
+        packages = {
+          inherit (pkgs) pythonEnv;
+          inherit (pkgs.mach-nix) mach-nix;
+        };
       });
 }

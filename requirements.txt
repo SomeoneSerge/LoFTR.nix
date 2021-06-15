@@ -7,5 +7,5 @@ yacs>=0.1.8
 matplotlib
 h5py>=3.1.0
 tqdm
-autopep8
 pylint
+black
