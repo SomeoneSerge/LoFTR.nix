@@ -20,26 +20,9 @@
             requirements = builtins.readFile ./requirements.txt;
             overridesPost = [
               (python-final: python-prev: {
-                albumentations = final.mach-nix.buildPythonPackage rec {
-                  pname = "albumentations";
-                  version = "1.0.0";
-                  src = python-prev.fetchPypi {
-                    inherit pname version;
-                    sha256 =
-                      "sha256-i0TPXHMSs0mDd4Fw+z8P2AJ0kjKGQmAtx1ajmpCr1e0=";
-                    format = "wheel";
-                    python = "py3";
-                  };
-                  pipInstallFlags = [ "--no-binary=imgaug,albumentations" ];
-                  format = "wheel";
-                  requirements = ''
-                    numpy>=1.11.1
-                    scipy
-                    scikit-image>=0.16.1
-                    PyYAML
-                    opencv-python>=4.1.1
-                  '';
-                };
+                opencv-python =
+                  python-prev.opencv4.overrideAttrs (_: { enableGtk = true; });
+
               })
             ];
             _.opencensus-context.postInstall = ''
@@ -61,6 +44,7 @@
         packages = {
           inherit (pkgs) pythonEnv;
           inherit (pkgs.mach-nix) mach-nix;
+          inherit pkgs;
         };
       });
 }
